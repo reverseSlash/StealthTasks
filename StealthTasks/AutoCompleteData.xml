@@ -2,8 +2,10 @@
 <AutoCompleteCommands>
   <AutoCompleteCommand Name="visual studio" 
                        Command="C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
-                       Arguments=""/>
+                       Arguments=""
+                       Type="Process"/>
   <AutoCompleteCommand Name="firefox" 
                        Command="C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
-                       Arguments=""/>
+                       Arguments=""
+                       Type="Process"/>
 </AutoCompleteCommands>

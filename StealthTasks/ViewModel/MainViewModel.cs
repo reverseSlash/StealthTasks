@@ -69,7 +69,7 @@ namespace StealthTasks.ViewModel
             EscapePressedCommand = new RelayCommand(ExecuteEscapePressedCommand);
             SpecialKeyComboPressedCommand = new RelayCommand(ExecuteSpecialKeyComboPressedCommand);
             RefreshComboPressedCommand = new RelayCommand(ExecuteRefreshComboPressedCommand);
-
+            
             Services.XmlDataService.GetAutoCompleteData("AutoCompleteData.xml", _commandsNamesList, _autoCompleteDataList);
         }
 
@@ -95,14 +95,9 @@ namespace StealthTasks.ViewModel
             {
                 if (autoCompleteData.Name.Equals(_selectedCommandText))
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = autoCompleteData.Command;
-                    startInfo.Arguments = autoCompleteData.Arguments;
-
-                    Process.Start(startInfo);
+                    autoCompleteData.ExecuteCommand();
 
                     SelectedCommandText = "";
-
                     WindowVisibility = Visibility.Hidden;
                 }
             }
