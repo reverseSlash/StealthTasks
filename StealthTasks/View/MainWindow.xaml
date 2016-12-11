@@ -1,0 +1,41 @@
+﻿<Window x:Class="StealthTasks.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StealthTasks"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+        xmlns:hotkey="clr-namespace:NHotkey.Wpf;assembly=NHotkey.Wpf"
+        mc:Ignorable="d"
+        Title="Stealth Tasks" 
+        Height="50" 
+        Width="525" 
+        DataContext="{Binding Path=Main, Source={StaticResource Locator}}" 
+        ResizeMode="NoResize" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=CommandTextBox}"
+        Visibility="{Binding WindowVisibility}" 
+        Icon="../Icon.ico" 
+        IsVisibleChanged="MainWindow_OnIsVisibleChanged">
+    
+    <TextBox Name="CommandTextBox" 
+             Text="{Binding SelectedCommandText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding CommandsNamesList}"
+             behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase"
+             FontSize="32">
+        <TextBox.InputBindings>
+            <KeyBinding Key="Return" 
+                        Command="{Binding EnterPressedCommand}"/>
+            <KeyBinding Key="Escape"
+                        Command="{Binding EscapePressedCommand}"/>
+            <KeyBinding Gesture="Ctrl+W"
+                        Command="{Binding SpecialKeyComboPressedCommand}"
+                        hotkey:HotkeyManager.RegisterGlobalHotkey="True"/>
+            <KeyBinding Gesture="Ctrl+R"
+                        Command="{Binding RefreshComboPressedCommand}"/>
+        </TextBox.InputBindings>
+    </TextBox>
+    
+</Window>
